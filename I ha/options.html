@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenAI Extension Options</title>
+  <style>
+    body { font-family: sans-serif; margin: 30px; }
+    label { display: block; margin-bottom: 10px; }
+    input[type=password],input[type=text] { width: 370px; }
+    #status { margin-top: 12px; color: green; }
+  </style>
+</head>
+<body>
+  <div style="margin-top:16px; color:#444;">
+  <strong>Quick Tip:</strong>You can trigger the "Reword" action on selected text with a hotkey.<br>We recommend Ctrl+Alt+R on Windows/Linux or Cmd+Ctrl+R on Mac. 
+  The default is <b>Ctrl+Alt+R</b> (Windows/Linux) or <b>Cmd+Ctrl+R</b> (Mac).<br>
+
+  <span style="font-size:0.95em;">(You can change this shortcut in <a target="_blank" href="chrome://extensions/shortcuts">chrome://extensions/shortcuts</a>.)</span>
+  <br>
+  <br>
+</div>
+  <label>
+    OpenAI API Key:&nbsp;
+    <input type="password" id="apiKey" placeholder="sk-...">
+  </label>
+  <label>
+    Prompt:&nbsp;
+    <input type="text" id="prompt" placeholder="e.g. Please rewrite this more concisely:">
+  </label>
+  <button id="save">Save</button>
+  <div id="status"></div>
+  <script src="options.js"></script>
+</body>

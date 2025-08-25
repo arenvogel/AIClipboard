@@ -65,7 +65,8 @@ class Clipboard {
   @MainActor
   func copy(_ string: String) {
     pasteboard.clearContents()
-    pasteboard.setString(string, forType: .string)
+    pasteboard.setString(string, forType: .string) // Set standard string type first
+    pasteboard.setString(string, forType: .fromMaccy) // Keep Maccy marker
     sync()
     checkForChangesInPasteboard()
   }

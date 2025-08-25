@@ -2,6 +2,8 @@ import AppKit
 import Defaults
 import Foundation
 import Settings
+import SwiftUI
+import KeyboardShortcuts
 
 @Observable
 class AppState: Sendable {
@@ -196,6 +198,153 @@ class AppState: Sendable {
             toolbarIcon: NSImage.gearshape2!
           ) {
             AdvancedSettingsPane()
+          },
+          Settings.Pane(
+            identifier: Settings.PaneIdentifier.aiRewording,
+            title: "AI Rewording",
+            toolbarIcon: NSImage(systemSymbolName: "sparkles", accessibilityDescription: "sparkles")!
+            
+          ) {
+            Settings.Container(contentWidth: 450) {
+              // OpenAI API Key Section
+              Settings.Section(title: "OpenAI Configuration") {
+                VStack(alignment: .leading, spacing: 8) {
+                  Text("OpenAI API Key")
+                    .font(.headline)
+                  
+                  VStack(alignment: .leading, spacing: 4) {
+                    Text("Enter your OpenAI API key:")
+                      .foregroundColor(.secondary)
+                    SecureField("API Key", text: Binding(
+                      get: { Defaults[.azureOpenAIApiKey] },
+                      set: { Defaults[.azureOpenAIApiKey] = $0 }
+                    ))
+                      .textFieldStyle(.roundedBorder)
+                    
+                    Text("Your API key will be stored securely and used for AI rewording requests.")
+                      .font(.caption)
+                      .foregroundColor(.secondary)
+                  }
+                }
+                .padding()
+                .background(Color(NSColor.controlBackgroundColor))
+                .cornerRadius(8)
+              }
+              
+              Settings.Section(title: "AI Rewording Configuration") {
+                VStack(spacing: 20) {
+                  Text("Configure hotkeys and prompts for AI rewording")
+                    .foregroundColor(.secondary)
+                  
+                  // Prompt 1
+                  VStack(alignment: .leading, spacing: 8) {
+                    Text("Prompt 1")
+                      .font(.headline)
+                    
+                    HStack {
+                      Text("Hotkey:")
+                      KeyboardShortcuts.Recorder(for: .aiRewording1)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                      Text("Prompt:")
+                      TextField("Enter AI prompt", text: Binding(
+                        get: { Defaults[.aiRewordingPrompt1] },
+                        set: { Defaults[.aiRewordingPrompt1] = $0 }
+                      ), axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
+                        .lineLimit(3...6)
+                    }
+                  }
+                  .padding()
+                  .background(Color(NSColor.controlBackgroundColor))
+                  .cornerRadius(8)
+                  
+                  // Prompt 2
+                  VStack(alignment: .leading, spacing: 8) {
+                    Text("Prompt 2")
+                      .font(.headline)
+                    
+                    HStack {
+                      Text("Hotkey:")
+                      KeyboardShortcuts.Recorder(for: .aiRewording2)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                      Text("Prompt:")
+                      TextField("Enter AI prompt", text: Binding(
+                        get: { Defaults[.aiRewordingPrompt2] },
+                        set: { Defaults[.aiRewordingPrompt2] = $0 }
+                      ), axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
+                        .lineLimit(3...6)
+                    }
+                  }
+                  .padding()
+                  .background(Color(NSColor.controlBackgroundColor))
+                  .cornerRadius(8)
+                  
+                  // Prompt 3
+                  VStack(alignment: .leading, spacing: 8) {
+                    Text("Prompt 3")
+                      .font(.headline)
+                    
+                    HStack {
+                      Text("Hotkey:")
+                      KeyboardShortcuts.Recorder(for: .aiRewording3)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                      Text("Prompt:")
+                      TextField("Enter AI prompt", text: Binding(
+                        get: { Defaults[.aiRewordingPrompt3] },
+                        set: { Defaults[.aiRewordingPrompt3] = $0 }
+                      ), axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
+                        .lineLimit(3...6)
+                    }
+                  }
+                  .padding()
+                  .background(Color(NSColor.controlBackgroundColor))
+                  .cornerRadius(8)
+                }
+              }
+              
+              // AI Define Configuration Section
+              Settings.Section(title: "AI Define Configuration") {
+                VStack(spacing: 20) {
+                  Text("Configure hotkey and prompt for AI definitions")
+                    .foregroundColor(.secondary)
+                  
+                  VStack(alignment: .leading, spacing: 8) {
+                    Text("AI Define")
+                      .font(.headline)
+                    
+                    HStack {
+                      Text("Hotkey:")
+                      KeyboardShortcuts.Recorder(for: .aiDefine)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                      Text("Prompt:")
+                      TextField("Enter AI define prompt", text: Binding(
+                        get: { Defaults[.aiDefinePrompt] },
+                        set: { Defaults[.aiDefinePrompt] = $0 }
+                      ), axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
+                        .lineLimit(2...4)
+                      
+                      Text("This prompt will be used to generate definitions. The selected text will be appended to your prompt.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    }
+                  }
+                  .padding()
+                  .background(Color(NSColor.controlBackgroundColor))
+                  .cornerRadius(8)
+                }
+              }
+            }
           }
         ]
       )

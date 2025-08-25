@@ -58,4 +58,11 @@ extension Defaults.Keys {
   static let windowSize = Key<NSSize>("windowSize", default: NSSize(width: 450, height: 800))
   static let windowPosition = Key<NSPoint>("windowPosition", default: NSPoint(x: 0.5, y: 0.8))
   static let showApplicationIcons = Key<Bool>("showApplicationIcons", default: false)
+  static let aiRewordingPrompt1 = Key<String>("aiRewordingPrompt1", default: "")
+  static let aiRewordingPrompt2 = Key<String>("aiRewordingPrompt2", default: "")
+  static let aiRewordingPrompt3 = Key<String>("aiRewordingPrompt3", default: "")
+  static let aiDefinePrompt = Key<String>("aiDefinePrompt", default: "Define and explain the meaning of:")
+  static let azureOpenAIApiKey = Key<String>("azureOpenAIApiKey", default: "")
+  static let azureOpenAIResourceName = Key<String>("azureOpenAIResourceName", default: "")
+  static let azureOpenAIDeploymentName = Key<String>("azureOpenAIDeploymentName", default: "gpt-4")
 }
